@@ -41,9 +41,8 @@ import numpy as np          # For working with numbers and arrays (images are ar
 import matplotlib.pyplot as plt  # For creating graphs and showing images
 from PIL import Image       # PIL = Python Imaging Library, for loading/saving images
 from scipy import stats     # For doing statistical tests
-from scipy.ndimage import gaussian_filter  # For making images blurry
+from scipy.ndimage import gaussian_filter, convolve  # For making images blurry and convolution
 from scipy.fft import fft2, ifft2, fftshift, ifftshift  # For fancy math (Fourier transform)
-from skimage import util    # For more image processing tools
 import os                   # For working with files and folders
 import warnings             # For hiding scary warning messages
 warnings.filterwarnings('ignore')  # Hide warnings to keep output clean
@@ -266,7 +265,7 @@ class ImageProcessor:
         
         # Apply the kernel to the image using convolution
         # Convolution is like sliding the kernel over every pixel
-        return util.convolve(self.original_image, kernel, mode='reflect')
+        return convolve(self.original_image, kernel, mode='reflect')
     
     def _apply_mosaic_effect(self, tile_size):
         """
